@@ -1,8 +1,60 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, InsertResult, Repository } from 'typeorm';
+import { CreateUserDto } from './dto/createUser.dto';
+import { LoginUserDto } from './dto/loginUser.dto';
+import { UserDto } from './dto/user.dto';
+import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  getHello(): string {
-    return 'Hello World!';
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
+
+  async getUsers(): Promise<User[]> {
+    return this.usersRepository.find();
+  }
+
+  async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
+    const { email } = createUserDto;
+
+    const alreadyExistsClient = await this.usersRepository.findOne({ where: { email } });
+    if (alreadyExistsClient) {
+      throw new InternalServerErrorException(`Já existe um usuário cadastrado com o email passado`);
+    }
+
+    try {
+      return await this.usersRepository.insert(createUserDto);
+    } catch (err) {
+      throw new InternalServerErrorException(err.sqlMessage || err);
+    }
+  }
+
+  async findByLogin({ email, password }: LoginUserDto): Promise<UserDto> {    
+    const user = await this.usersRepository.findOne({ where: { email } });
+    
+    if (!user) {
+      throw new UnauthorizedException('Usuário não existe');    
+    }
+    
+    // compare passwords    
+    const areEqualPasswords = await bcrypt.compare(user.password, password);
+    
+    if (!areEqualPasswords) {
+      throw new UnauthorizedException('Senha incorreta');    
+    }
+    
+    return user;  
+  }
+
+  async deleteUser(id: string): Promise<DeleteResult> {
+    try {
+      return await this.usersRepository.delete(id);
+    } catch (err) {
+      throw new InternalServerErrorException(err.sqlMessage || err);
+    }
   }
 }

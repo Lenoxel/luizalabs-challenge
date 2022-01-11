@@ -1,12 +1,25 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { DeleteResult, InsertResult } from 'typeorm';
+import { CreateUserDto } from './dto/createUser.dto';
+import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 
-@Controller()
+@Controller('api/v1/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  getHello(): string {
-    return this.userService.getHello();
+  async getUsers(): Promise<User[]> {
+    return await this.userService.getUsers();
+  }
+
+  @Post()
+  async createUser(@Body() createUserDto: CreateUserDto): Promise<InsertResult> {
+    return await this.userService.createUser(createUserDto);
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') id: string): Promise<DeleteResult> {
+    return await this.userService.deleteUser(id);
   }
 }

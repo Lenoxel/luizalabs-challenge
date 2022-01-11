@@ -1,23 +1,108 @@
 version: '3'
 
 services:
-  apps:
-    container_name: apps
+  client:
+    container_name: client
     build:
       context: .
-      target: development
       dockerfile: ./Dockerfile
-    command: npm run start:docker
+    command: npm run start:client
     ports:
       - 3000:3000
-      - 3001:3001
-      - 3002:3002
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
     networks:
       - apps-network
+    # network_mode: host
+    links:
+      - mysql_client
+    depends_on:
+      - mysql_client
+  mysql_client:
+    container_name: mysql_client
+    restart: always
+    image: mysql:5.7
+    # command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3308:3306
+    volumes:
+      - data-mysql_client:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=clients
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+    networks:
+      - apps-network
+  product:
+    container_name: product
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:product
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    networks:
+      - apps-network
+    links:
+      - mongodb_product
+    depends_on:
+      - mongodb_product
+  mongodb_product:
+    image : mongo
+    container_name: mongodb_product
+    environment:
+    - PUID=1000
+    - PGID=1000
+    volumes:
+      - data-mongodb_product:/data/db
+    ports:
+    - 27017:27017
+    restart: always
+    networks:
+    - apps-network
+  # user:
+  #   container_name: user
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   command: npm run start:user
+  #   ports:
+  #     - 3002:3002
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   restart: unless-stopped
+  #   networks:
+  #     - apps-network
+  #   links:
+  #     - mysql_user
+  #   depends_on:
+  #     - mysql_user
+  # mysql_user:
+  #   container_name: mysql_user
+  #   restart: always
+  #   image: mysql:5.7
+  #   ports:
+  #     - 3307:3306
+  #   volumes:
+  #     - data-mysql_user:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_DATABASE=users
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_PASSWORD=root
+  #   networks:
+  #     - apps-network
+
+volumes:
+  data-mysql_client:
+  data-mysql_user:
+  data-mongodb_product:
 
 networks:
   apps-network:
