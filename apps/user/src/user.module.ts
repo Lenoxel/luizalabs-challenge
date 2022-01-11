@@ -21,19 +21,13 @@ import { UserService } from './user.service';
       migrationsRun: false,
       logging: ['warn', 'error'],
       cli: {
-        migrationsDir: 'apps/user/src/migrations'
-      }
+        migrationsDir: 'apps/user/src/migrations',
+      },
     }),
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [
-    UserService
-  ],
-  controllers: [
-    UserController
-  ],
-  exports: [
-    UserService,
-  ]
+  providers: [UserService],
+  controllers: [UserController],
+  exports: [UserService],
 })
 export class UserModule {}

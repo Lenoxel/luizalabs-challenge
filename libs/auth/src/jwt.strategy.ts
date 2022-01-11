@@ -6,19 +6,18 @@ import { AuthService } from '.';
 import { JwtPayload } from './jwt.payload';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) { 
-    constructor(private readonly authService: AuthService) {
-        super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: process.env.SECRETKEY,
-        });  
-    }
-    
-    async validate(payload: JwtPayload): Promise<UserDto> {
-        const user = await this.authService.validateUser(payload);
-        if (!user) {
-            throw new UnauthorizedException('Token inválido');    
-        }    
-        return user;  
-    }
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: process.env.JWT_SECRET,
+    });
+  }
+
+  async validate(payload: JwtPayload): Promise<any> {
+    return {
+      userId: payload.userId,
+    };
+  }
 }

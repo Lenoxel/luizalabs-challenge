@@ -1,11 +1,8 @@
-import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, InsertResult, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
-import { LoginUserDto } from './dto/loginUser.dto';
-import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -21,9 +18,13 @@ export class UserService {
   async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
     const { email } = createUserDto;
 
-    const alreadyExistsClient = await this.usersRepository.findOne({ where: { email } });
+    const alreadyExistsClient = await this.usersRepository.findOne({
+      where: { email },
+    });
     if (alreadyExistsClient) {
-      throw new InternalServerErrorException(`Já existe um usuário cadastrado com o email passado`);
+      throw new InternalServerErrorException(
+        `Já existe um usuário cadastrado com o email passado`,
+      );
     }
 
     try {
@@ -33,21 +34,12 @@ export class UserService {
     }
   }
 
-  async findByLogin({ email, password }: LoginUserDto): Promise<UserDto> {    
-    const user = await this.usersRepository.findOne({ where: { email } });
-    
-    if (!user) {
-      throw new UnauthorizedException('Usuário não existe');    
-    }
-    
-    // compare passwords    
-    const areEqualPasswords = await bcrypt.compare(user.password, password);
-    
-    if (!areEqualPasswords) {
-      throw new UnauthorizedException('Senha incorreta');    
-    }
-    
-    return user;  
+  async findByEmail(email: string) {
+    return await this.usersRepository.findOne({
+      where: {
+        email,
+      },
+    });
   }
 
   async deleteUser(id: string): Promise<DeleteResult> {
