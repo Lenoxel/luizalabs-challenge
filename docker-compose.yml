@@ -1,71 +1,85 @@
 version: '3'
 
 services:
-  # client:
-  #   container_name: client
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   command: npm run start:client
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - .:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   restart: unless-stopped
-  #   networks:
-  #     - apps-network
-  #   # network_mode: host
-  #   links:
-  #     - mysql_client
-  #   depends_on:
-  #     - mysql_client
-  # mysql_client:
-  #   container_name: mysql_client
-  #   restart: always
-  #   image: mysql:5.7
-  #   # command: mysqld --default-authentication-plugin=mysql_native_password
-  #   ports:
-  #     - 3308:3306
-  #   volumes:
-  #     - data-mysql_client:/var/lib/mysql
-  #   environment:
-  #     - MYSQL_DATABASE=clients
-  #     - MYSQL_ROOT_PASSWORD=root
-  #     - MYSQL_PASSWORD=root
-  #   networks:
-  #     - apps-network
-  # product:
-  #   container_name: product
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   command: npm run start:product
-  #   ports:
-  #     - 3001:3001
-  #   volumes:
-  #     - .:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   restart: unless-stopped
-  #   networks:
-  #     - apps-network
-  #   links:
-  #     - mongodb_product
-  #   depends_on:
-  #     - mongodb_product
-  # mongodb_product:
-  #   image : mongo
-  #   container_name: mongodb_product
-  #   environment:
-  #   - PUID=1000
-  #   - PGID=1000
-  #   volumes:
-  #     - data-mongodb_product:/data/db
-  #   ports:
-  #   - 27017:27017
-  #   restart: always
-  #   networks:
-  #   - apps-network
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:client
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    networks:
+      - apps-network
+    # network_mode: host
+    links:
+      - mysql_client
+    depends_on:
+      - mysql_client
+  mysql_client:
+    container_name: mysql_client
+    restart: always
+    image: mysql:5.7
+    # command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3308:3306
+    volumes:
+      - data-mysql_client:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=clients
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+    networks:
+      - apps-network
+  product:
+    container_name: product
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:product
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    networks:
+      - apps-network
+    links:
+      - mongodb_product
+    depends_on:
+      - mongodb_product
+  mongodb_product:
+    image : mongo
+    container_name: mongodb_product
+    environment:
+    - PUID=1000
+    - PGID=1000
+    volumes:
+      - data-mongodb_product:/data/db
+    ports:
+    - 27017:27017
+    restart: always
+    networks:
+    - apps-network
+  auth:
+    container_name: auth
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:auth
+    ports:
+      - 3003:3003
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    networks:
+      - apps-network
   user:
     container_name: user
     build:

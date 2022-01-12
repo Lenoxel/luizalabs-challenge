@@ -15,6 +15,7 @@
     "start:client": "nest start client --debug --watch",
     "start:product": "nest start client-product --debug --watch",
     "start:user": "nest start user --debug --watch",
+    "start:auth": "nest start auth --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -95,9 +96,6 @@
     "roots": [
       "<rootDir>/apps/",
       "<rootDir>/libs/"
-    ],
-    "moduleNameMapper": {
-      "^auth/auth(|/.*)$": "<rootDir>/libs/auth/src/$1"
-    }
+    ]
   }
 }

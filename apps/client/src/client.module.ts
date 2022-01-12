@@ -3,6 +3,7 @@ import { ClientService } from './client.service';
 import { ClientController } from './client.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Client } from './entities/client.entity';
+import { AuthModule } from 'apps/auth/src/auth.module';
 
 @Global()
 @Module({
@@ -25,9 +26,9 @@ import { Client } from './entities/client.entity';
       }
     }),
     TypeOrmModule.forFeature([Client]),
+    AuthModule,
   ],
   providers: [ClientService],
   controllers: [ClientController],
-  exports: [TypeOrmModule]
 })
 export class ClientModule {}

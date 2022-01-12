@@ -12,13 +12,6 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "paths": {
-      "auth/auth": [
-        "libs/auth/src"
-      ],
-      "auth/auth/*": [
-        "libs/auth/src/*"
-      ]
-    }
+    "paths": {}
   }
 }

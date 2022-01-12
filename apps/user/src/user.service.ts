@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, InsertResult, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
+import { LoginUserDto } from './dto/loginUser.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<InsertResult> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     const { email } = createUserDto;
 
     const alreadyExistsClient = await this.usersRepository.findOne({
@@ -28,7 +29,9 @@ export class UserService {
     }
 
     try {
-      return await this.usersRepository.insert(createUserDto);
+      const user = new User();
+      user.setUser(createUserDto);
+      return await this.usersRepository.save(user);
     } catch (err) {
       throw new InternalServerErrorException(err.sqlMessage || err);
     }
