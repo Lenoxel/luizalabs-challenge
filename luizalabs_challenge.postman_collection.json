@@ -1,0 +1,307 @@
+{
+	"variables": [],
+	"info": {
+		"name": "LuizaLabs Challenge",
+		"_postman_id": "9cbbd0ce-77a9-e99d-171c-227f6528c6b5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Clients",
+					"request": {
+						"url": "http://localhost:3000/api/v1/clients",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Client",
+					"request": {
+						"url": "http://localhost:3000/api/v1/clients",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Gabriel Lenon\",\n\t\"email\": \"glenonsilva@gmail.com\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Client",
+					"request": {
+						"url": "http://localhost:3000/api/v1/clients/549cee76-5578-4ae8-b008-89d6596dbe15",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Gabriel Lenon\",\n\t\"email\": \"glenonsilva@gmail.com\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Client",
+					"request": {
+						"url": "http://localhost:3000/api/v1/clients/1c4e44a5-e60a-4629-bf19-95021290ddc7",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client by id",
+					"request": {
+						"url": "http://localhost:3000/api/v1/clients/549cee76-5578-4ae8-b008-89d6596dbe15",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Users",
+					"request": {
+						"url": "http://localhost:3002/api/v1/users",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"url": "http://localhost:3002/api/v1/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"glenonsilva@gmail.com\",\n\t\"password\": \"Luizalabs1234\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"url": "http://localhost:3002/api/v1/users/2811f3e5-76b2-470a-b33c-12bd0e27627c",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"glenonsilva@gmail.com\",\n\t\"password\": \"Luizalabs1234\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorite Products",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Products By API",
+					"request": {
+						"url": {
+							"raw": "http://challenge-api.luizalabs.com/api/product/?page=1",
+							"protocol": "http",
+							"host": [
+								"challenge-api",
+								"luizalabs",
+								"com"
+							],
+							"path": [
+								"api",
+								"product",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Favorite Product",
+					"request": {
+						"url": "http://localhost:3001/api/v1/products/6e1f37ff-d3d4-88cc-dbbf-5747a327694f/clients/549cee76-5578-4ae8-b008-89d6596dbe15",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Favorite Product",
+					"request": {
+						"url": "http://localhost:3001/api/v1/products/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"clientId\": \"549cee76-5578-4ae8-b008-89d6596dbe15\",\n\t\"productId\": \"1c95d400-9847-eda3-de07-0e62d80a30c6\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client Favorite Products",
+					"request": {
+						"url": "http://localhost:3001/api/v1/products/clients/549cee76-5578-4ae8-b008-89d6596dbe15",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNzlhNDJkOC04YmJlLTRiZDQtODA5OC0xMjQxNWU5NzU0YTYiLCJpYXQiOjE2NDE5NDYyMjd9.2cSDN_SBVr2-0gDsx5iHiObbPDxIUbnT-UMcaH0djlo",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"url": "http://localhost:3003/api/v1/auth/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"glenonsilva@gmail.com\",\n\t\"password\": \"Luizalabs1234\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

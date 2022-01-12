@@ -1,3 +1,58 @@
+# Luizalabs Challenge
+
+## Descrição
+
+O projeto foi construído utilizando o framework Nest.js, tomando proveito das libs e built-ins que o mesmo fornece para resolver os desafios propostos e implementar toda a API Restful.
+
+A API Restful foi arquiteturada no modelo de microservices, em um monorepo, com o objetivo de manter a alta performance em cada domínio da aplicação, possibilitando que cada microservice escale individualmente.
+
+Os domínios da aplicação são:
+
+1 - auth: Responsável pela autenticação e autorização da aplicação.
+
+2 - client: Responsável pelo gerenciamento e visualização (CRUD) dos clientes.
+
+3 - client-product: Responsável por salvar e manter a lista de produtos favoritos de um cliente.
+
+4 - user: Responsável pela criação dos usuários que têm acesso à aplicação, provendo a autenticação na mesma e a autorização na consulta dos demais endpoints.
+
+## Requisitos para rodar a aplicação
+
+Para rodar o projeto localmente, é necessário utilizar: Docker, Docker-Compose, Node e NPM.
+
+Na minha máquina, as versões utilizadas durante o desenvolvimento foram: Docker - 20.10.12; docker-compose - 1.26.0; Node - 14.8.2; NPM - 6.14.15.
+
+## Instalação e execução da aplicação
+
+Antes de rodar o comando abaixo, certifique-se de deixar as portas que serão utilizadas para servir a aplicação livres: 3000, 3001, 3002, 3003, 3308, 3309 e 27017, sendo todas no domínio localhost.
+
+Na pasta raiz do projeto, execute:
+
+```bash
+# Caso deseje acompanhar os servidores pelo terminal, não utilizar o alias "-d"
+$ docker-compose up -d
+```
+
+## Testar a aplicação
+
+Para fazer as chamadas nos endpoints da aplicação, sugiro a importação do arquivo "luizalabs_challenge.postman_collection.json", que está na pasta raiz do projeto, para dentro do Postman. Esse arquivo contém todas as chamadas possíveis da API, com alguns exemplos já inseridos.
+
+# Sobre o Nest.js
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -21,53 +76,3 @@
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
